@@ -1,0 +1,28 @@
+
+#Ejemplo Tribonacci con recursividad de pila no lineal
+def tribonacci(n):
+    if (n == 0):
+        return 0
+    elif (n == 1):
+        return 0
+    elif (n == 2):
+        return 1
+    else:
+        return tribonacci(n-1)+tribonacci(n-2)+tribonacci(n-3)
+
+#recursividad de cola
+def tribonacci_cola(n):
+    def mi_super_tribonacci(n,a,b,c):
+        if (n == 0):
+            return a 
+        elif (n == 1):
+            return b
+        elif (n == 2):
+            return c
+        else:
+            return mi_super_tribonacci(n-1,b,c,(a+b+c))
+    return mi_super_tribonacci(n,0,0,1)
+    
+print(tribonacci(4))
+print(tribonacci_cola(4))
+
