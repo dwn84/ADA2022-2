@@ -1,0 +1,25 @@
+#Ejemplo recursividad indirecta - inicializar recursividad
+def Recorrer():
+    IniR(self.raiz)
+
+def IniR(raiz):
+    if(x!= None):
+        return
+    return IniR(self.raiz.next) - self.raiz.next.data
+
+#Ejemplo recursividad indirecta - inicializar recursividad
+#Función que crea una función
+def MiRecursividad():
+    def SoyRecursivo(x):
+        if():
+            return
+        SoyRecursivo(x-1)
+    
+    SoyRecursivo(0)
+
+
+
+
+#--- Main---
+Recorrer()
+MiRecursividad()#Para el Main no "existe" SoyRecursivo (es completamente privado)
