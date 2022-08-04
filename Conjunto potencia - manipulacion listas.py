@@ -7,26 +7,26 @@ print(datos[-1])
 print(datos[-2])
 print(datos[:-1])
 print(datos[-1:])
-datos + [9]
+datos + [9] #concatenación de listas
 
 def validarX(n):
     if(n%2==0):
         return True
     else:
         return False
-
+#filtrado de lista (implica el mapeado)
 resultado = filter(validarX,datos)  
 print(list(resultado))
 print(datos)
 
-#Listas de compresion
+#Listas de compresion (mapeado y filtrado)
 
 for x in datos:
     print(x)
 for x in range(10):
     print(x)
 
-c = [2 ** x for x in datos if(x%2==0)]
+c = [2 ** x for x in datos if(x%2==0)]#filtrado
 print(c)
 
 #[2, 4, 8, 16, 32, 64, 128]
