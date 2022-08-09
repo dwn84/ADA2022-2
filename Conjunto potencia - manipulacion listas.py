@@ -120,4 +120,5 @@ print(f"Total grupos de hombres {total_combinaciones(7,2)}")
 print(f"Total grupos de mujeres {total_combinaciones(4,3)}")    
 print(f"Formar equipos con 2 hombres y 3 mujeres: {h*m}")
 #????? Como genero el resultado de posibles equipos??????
+#el tamaño del resultado deberia ser 84
 
