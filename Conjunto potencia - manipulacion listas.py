@@ -52,4 +52,39 @@ def conjunto_potencia(c):
         return ultimo + [listaC + [c[-1]] for listaC in ultimo]
 
 print(conjunto_potencia(mis_daticos))    
-#[[], ['Lechuga'], ['tomate'], ['Lechuga', 'tomate'], ['cebolla'], ['Lechuga', 'cebolla'], ['tomate', 'cebolla'], ['Lechuga', 'tomate', 'cebolla']]
+#[[], [obj1], [obj2], ['Lechuga', 'tomate'], ['cebolla'], ['Lechuga', 'cebolla'], ['tomate', 'cebolla'], ['Lechuga', 'tomate', 'cebolla']]
+
+def factorial(n):
+    if (n==0):
+        return 1
+    else:
+        return factorial(n-1)*n
+    
+def total_combinaciones(n,r):
+        return (factorial(n))/(factorial(r)*factorial(n-r))
+
+print(f"Total saludos en un grupo de 4 personas {total_combinaciones(4,2)}")    
+
+class persona:
+    def __init__(self, nombre,sexo):
+        self.nombre = nombre
+        self.sexo = sexo
+    def __str__(self):
+        return self.nombre
+
+personitas = [persona('Angela','F'),persona('Esperanza','F'),persona('Melquiadez','M'),persona('Renato','M')]        
+
+        
+def mostrar_personitas(per):
+    
+    for o in per:
+        lista_personas=[]
+        for p in o:
+            lista_personas.append(p.nombre)
+        print(lista_personas)
+        
+mostrar_personitas(conjunto_potencia(personitas))
+
+def mostrar_combinaciones(lista,r):
+    #filtrar el conjunto potencia por el valor r
+    
