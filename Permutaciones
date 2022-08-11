@@ -1,0 +1,28 @@
+#print(sum(mini_list))#Sumatoria arimetica de los elementos de la lista
+#print(sum([mini_list],[]))#Concatenacion de elementos en lista
+
+def add_data_to_list(n,my_list,i):
+    return my_list[:i] + [n] + my_list[i:]
+    
+
+def add_data_to_all_positions(n,my_list):
+    return [add_data_to_list(n,my_list,i) for i in range(len(my_list)+1)]
+
+
+def permutation(my_list):
+    if(len(my_list)==0):
+        return [[]]
+    else:
+        
+        return sum(
+            [add_data_to_all_positions(my_list[0],lista_previa) 
+                 for lista_previa in permutation(my_list[1:])],[])
+
+mini_list = [1,2,3,4]    
+print(add_data_to_all_positions(4,mini_list))
+
+
+print(permutation(mini_list))
+
+
+
