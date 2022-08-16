@@ -1,0 +1,23 @@
+a = 5
+b = 11
+temp = 0
+
+
+
+a = temp
+a = b
+b = temp
+#intercambio de datos
+a,b = 8,14
+
+print(a and b)#14 - Retorna verdadero o ultimo valor evaluado
+print (a & b)#8 - bitwise
+#evalua condiciones en corto circuito
+
+#Es posible utilizar notación binaria y hexadecimal
+0x00F0054
+0b0101011
+
+
+
+
