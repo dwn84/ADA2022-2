@@ -1,0 +1,18 @@
+def heap_permutation(data, size):
+    if size == 1:
+        print(data)
+        return
+    
+    for i in range(size):
+        heap_permutation(data, size-1)
+            
+        if size & 1:
+            data[0], data[size-1] = data[size-1],data[0] 
+        else:
+            data[i], data[size-1] = data[size-1],data[i] 
+
+            
+a = [1,2,3]    
+
+heap_permutation(a, len(a))
+
