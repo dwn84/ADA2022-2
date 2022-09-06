@@ -1,0 +1,32 @@
+import time
+import matplotlib.pyplot as grafica
+import random
+
+def generate_plot(my_function):
+    times = []
+    for i in range(1,100000):
+        #my_list = random.sample(range(0,i), i)#peor caso: datos desordenados
+        my_list = range(0,i)#mejor caso: datos ordenados
+        start_time = time.time()
+        my_function(my_list)
+        end_time = time.time()
+        total_time = end_time - start_time
+        times.append(total_time)
+    
+    grafica.plot(times)
+    grafica.show()
+    
+def buble_sort(data):
+    for i in range(len(data)-1):
+        check_sort = True
+        for j in range((len(data)-1)-i):
+            if data[j]>data[j+1]:
+                data[j],data[j+1] = data[j+1], data[j]
+                check_sort = False
+        if(check_sort):
+            break
+    return data            
+my_list = [1,2,3,4,5,6,7,9]                
+generate_plot(buble_sort)
+#print(buble_sort(my_list))
+
