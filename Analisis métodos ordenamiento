@@ -4,9 +4,9 @@ import random
 
 def generate_plot(my_function):
     times = []
-    for i in range(1,100000):
-        #my_list = random.sample(range(0,i), i)#peor caso: datos desordenados
-        my_list = range(0,i)#mejor caso: datos ordenados
+    for i in range(1,1000):
+        my_list = random.sample(range(0,i), i)#caso promedio: datos desordenados
+        #my_list = list(range(0,i))#mejor caso: datos ordenados
         start_time = time.time()
         my_function(my_list)
         end_time = time.time()
@@ -25,8 +25,48 @@ def buble_sort(data):
                 check_sort = False
         if(check_sort):
             break
-    return data            
-my_list = [1,2,3,4,5,6,7,9]                
-generate_plot(buble_sort)
+    return data       
+
+
+def insertion_sort(data):    
+    for i in range(1,len(data)):
+        j = i
+        temp = data[i]
+        while (j>0 and data[j-1]>temp):
+            data[j]=data[j-1]
+            j-=1
+        data[j] = temp
+    return data 
+
+def selection_sort(data):    
+    for i in range(0,len(data)):
+        minor = i
+        for j in range(i+1,len(data)):
+            if data[j]<data[minor]:
+                minor = j
+        data[i],data[minor]=data[minor],data[i]
+    return data 
+            
+def create_partition(data, start,end):
+    refer = start
+    pivot_data = data[start]
+    for i in range (start,end):
+        if(data[i]<pivot_data):
+            data[i], data[refer]= data[refer], data[i]
+            refer+=1    
+    return refer
+
+def quick_sort(data):
+    def qs(data, start, end):        
+        refer = create_partition(data, start,end)
+        qs(data,start,refer-1)
+        qs(data,refer+1,end)
+    qs(data, 0, len(data)-1)
+    return data
+            
+my_list = [2,5,4,-1,9,6,8]                
+print(quick_sort(my_list))
+#generate_plot(buble_sort)
+#generate_plot(buble_sort)
 #print(buble_sort(my_list))
 
