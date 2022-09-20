@@ -46,26 +46,51 @@ def selection_sort(data):
                 minor = j
         data[i],data[minor]=data[minor],data[i]
     return data 
+
+def quick_sort_new(data):
+    
+    if len(data)<=1:
+        return data
+    else:
+        menores,mayores = dividir_datos(data,data[0])
+        return quick_sort_new(menores) + [data[0]] + quick_sort_new(mayores)
+      
+        
+def dividir_datos(data,n):    
+    menores = []
+    mayores = []
+    for i in data:
+        if i<n:
+            menores.append(i)
+        elif i>n:
+            mayores.append(i)
+    return menores,mayores
             
 def create_partition(data, start,end):
     refer = start
-    pivot_data = data[start]
+    pivot_data = data[end-1]
     for i in range (start,end):
         if(data[i]<pivot_data):
             data[i], data[refer]= data[refer], data[i]
             refer+=1    
+    data[end-1],data[refer]=data[refer],data[end-1]
     return refer
 
 def quick_sort(data):
     def qs(data, start, end):        
-        refer = create_partition(data, start,end)
-        qs(data,start,refer-1)
-        qs(data,refer+1,end)
-    qs(data, 0, len(data)-1)
+        
+        if(start<end):
+            refer = create_partition(data, start,end)
+            qs(data,start,refer)
+            qs(data,refer+1,end)
+        return data
+    qs(data, 0, len(data))
     return data
             
 my_list = [2,5,4,-1,9,6,8]                
-print(quick_sort(my_list))
+#print(quick_sort(my_list))
+print(quick_sort_new(my_list))
+
 #generate_plot(buble_sort)
 #generate_plot(buble_sort)
 #print(buble_sort(my_list))
