@@ -4,9 +4,10 @@ import random
 
 def generate_plot(my_function):
     times = []
-    for i in range(1,1000):
-        my_list = random.sample(range(0,i), i)#caso promedio: datos desordenados
-        #my_list = list(range(0,i))#mejor caso: datos ordenados
+    for i in range(1,700):
+        #my_list = random.sample(range(0,i), i)#caso promedio: datos desordenados
+        #my_list = list(range(i,0,-1))#peor caso
+        my_list = list(range(0,i))#mejor caso: datos ordenados
         start_time = time.time()
         my_function(my_list)
         end_time = time.time()
@@ -14,6 +15,8 @@ def generate_plot(my_function):
         times.append(total_time)
     
     grafica.plot(times)
+    grafica.title("mejor caso")
+
     grafica.show()
     
 def buble_sort(data):
@@ -52,11 +55,11 @@ def quick_sort_new(data):
     if len(data)<=1:
         return data
     else:
-        menores,mayores = dividir_datos(data,data[0])
+        menores,mayores = divide_data(data,data[0])
         return quick_sort_new(menores) + [data[0]] + quick_sort_new(mayores)
       
         
-def dividir_datos(data,n):    
+def divide_data(data,n):    
     menores = []
     mayores = []
     for i in data:
@@ -87,11 +90,57 @@ def quick_sort(data):
     qs(data, 0, len(data))
     return data
             
+def merge_sort(data):
+    return divide_data_merge(data,0,len(data)-1)
+    
+def divide_data_merge(data,start,end):
+    if(start<=end):
+        mid = (start + end)//2
+        divide_data_merge(data,start,mid)
+        divide_data_merge(data,mid+1,end)
+        join_data(data,start,mid,end)
+    
+    
+
+def join_data(data,start,mid,end):  
+    #rejoin = []
+    i = start
+    j = mid
+    k = 0
+    while i<mid and j<=end:
+        if data[i]<data[j]:
+            data[k] = data[i]
+            #rejoin.append(data[i])
+            i += 1
+        else:
+            data[k] = data[j]
+            #rejoin.append(data[j])
+            j += 1
+        k += 1
+    while(i<mid):
+        data[k] = data[i]
+        #rejoin.append(data[i])
+        i += 1
+        k += 1
+        
+    while(j<=end):
+        data[k] = data[j]
+        #rejoin.append(data[j])
+        j += 1
+        k += 1
+
+
+#[-1, -1, -1, -1, 9, 6, 8]
 my_list = [2,5,4,-1,9,6,8]                
+#validar el funcionamiento de la union de datos o division de datos
+print(merge_sort(my_list))
+print(my_list)
 #print(quick_sort(my_list))
-print(quick_sort_new(my_list))
+#print(quick_sort_new(my_list))
 
 #generate_plot(buble_sort)
 #generate_plot(buble_sort)
+#generate_plot(quick_sort)
+#generate_plot(quick_sort_new)
 #print(buble_sort(my_list))
 
