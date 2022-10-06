@@ -4,7 +4,7 @@ import random
 
 def generate_plot(my_function):
     times = []
-    for i in range(1,700):
+    for i in range(1,1100):
         #my_list = random.sample(range(0,i), i)#caso promedio: datos desordenados
         #my_list = list(range(i,0,-1))#peor caso
         my_list = list(range(0,i))#mejor caso: datos ordenados
@@ -94,53 +94,78 @@ def merge_sort(data):
     return divide_data_merge(data,0,len(data)-1)
     
 def divide_data_merge(data,start,end):
-    if(start<=end):
+    if(start<end):
         mid = (start + end)//2
         divide_data_merge(data,start,mid)
         divide_data_merge(data,mid+1,end)
-        join_data(data,start,mid,end)
-    
-    
-
+        join_data(data,start,mid,end)        
+    return data
 def join_data(data,start,mid,end):  
-    #rejoin = []
+    rejoin = []
     i = start
-    j = mid
-    k = 0
-    while i<mid and j<=end:
-        if data[i]<data[j]:
-            data[k] = data[i]
-            #rejoin.append(data[i])
+    j = mid + 1
+    while i<=mid and j<=end:
+        if data[i]<data[j]:            
+            rejoin.append(data[i])
             i += 1
-        else:
-            data[k] = data[j]
-            #rejoin.append(data[j])
+        else:            
+            rejoin.append(data[j])
             j += 1
-        k += 1
-    while(i<mid):
-        data[k] = data[i]
-        #rejoin.append(data[i])
-        i += 1
-        k += 1
         
-    while(j<=end):
-        data[k] = data[j]
-        #rejoin.append(data[j])
-        j += 1
-        k += 1
+    while(i<=mid):        
+        rejoin.append(data[i])
+        i += 1
+        
+        
+    while(j<=end):        
+        rejoin.append(data[j])
+        j += 1    
+    #llevar los datos de rejoin al parámetro de entrada: data  
+    k = 0
+    for i in range(start, end+1):
+        data[i] = rejoin[k]
+        k+=1
+    
+def create_heap(data,end):  
+    for i in range(end//2,-1,-1):
+        validate_heap(data,i,end)
+
+def validate_heap(data,i,end):
+    left = 2 * i + 1
+    right = left + 1    
+    maximum = i
+    
+    if left<=end and data[left] > data[maximum]:
+        maximum = left
+    if right<=end and data[right] > data[maximum]:
+        maximum = right
+        
+    if maximum != i:
+        data[maximum],data[i] = data[i],data[maximum]
+        validate_heap(data,maximum,end)
+def heap_sort(data):    
+    def heap_sort_i(data,end):        
+        create_heap(data,end)
+        while(end > 0):
+            data[0],data[end] = data[end],data[0]
+            end -= 1
+            validate_heap(data,0,end)
+    heap_sort_i(data, len(data)-1)
+    
 
 
-#[-1, -1, -1, -1, 9, 6, 8]
-my_list = [2,5,4,-1,9,6,8]                
+my_list = [2,5,7,-1,9,6,8]                
 #validar el funcionamiento de la union de datos o division de datos
-print(merge_sort(my_list))
-print(my_list)
+#print(merge_sort(my_list))
 #print(quick_sort(my_list))
 #print(quick_sort_new(my_list))
+
 
 #generate_plot(buble_sort)
 #generate_plot(buble_sort)
 #generate_plot(quick_sort)
 #generate_plot(quick_sort_new)
+#generate_plot(merge_sort)
+generate_plot(heap_sort)
 #print(buble_sort(my_list))
 
