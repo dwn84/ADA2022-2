@@ -1,0 +1,61 @@
+coins = [1000,500,200,100,50]
+
+
+def changeMoney(coins, money):
+    solution_set = []
+    for coin in coins:        
+        while money>=coin:
+            solution_set.append(coin)
+            money -= coin
+        if money==0:
+            break
+    return solution_set
+
+print(changeMoney(coins,1000000))
+print(f"La cantidad mímina de monedas es:{len(changeMoney(coins,1000000))}")
+
+
+class Coins:
+    def __init__(self,denomination,size):
+        self.denomination = denomination
+        self.size = size
+        
+    def __str__(self):
+        if self.size == 0:
+            mensaje = f"No tiene monedas de {self.denomination}"
+        elif self.size == 1:
+            mensaje = f"{self.size} moneda de {self.denomination}"
+        else:
+            mensaje = f"{self.size} monedas de {self.denomination}"
+        return mensaje
+    
+    def total_money(self):
+        return self.denomination * self.size
+    
+def select_max_coin(data):
+    maximum = 0    
+    for coin in data:
+        if coin.denomination > maximum:
+            maximum = coin.denomination
+            max_coin = coin
+    return max_coin     
+
+def total_coin(data):
+    return sum(c.size for c in data)
+
+def money(data):
+    return sum(c.total_money() for c in data)
+
+def changeMoney2(data,money):
+    my_coins = data[:]
+    solution_set = []
+    while money > 0 and my_coins:
+        maximum_coin = select_max_coin(my_coins)
+        my_coins.remove(maximum_coin)
+        maximum_coin.size = min(money//maximum_coin.denomination,maximum_coin.size)
+        solution_set.append(maximum_coin)
+        money -= maximum_coin.total_money()
+    return solution_set
+little_coins = [Coins(100,3),Coins(1000,7)]
+total = changeMoney2(little_coins,3200)
+#falta anunciar si falta o sobra dinero
