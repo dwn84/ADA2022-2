@@ -1,0 +1,28 @@
+import unittest
+import math
+
+
+def calcular_cubo(n):
+    return n**3
+def calcular_raiz(n):
+    if (n<0):
+        return "No es posible realizar la operación"
+    return math.sqrt(n)
+#https://docs.python.org/3/library/unittest.html
+class TestCalculos(unittest.TestCase):  
+    def test_cubo(self):        
+        self.assertEquals(calcular_cubo(2), 8)
+
+    def test_cubo2(self):
+        self.assertEquals(calcular_cubo(-2), -8)
+        
+    def test_cubo3(self):
+        self.assertEquals(calcular_cubo(0), 0)
+        
+    def test_cuboN(self):
+        for i in range(1000):
+            self.assertEquals(calcular_cubo(i),i**3)
+    def test_raiz(self):
+        self.assertEqual(calcular_raiz(-1), "No es posible realizar la operacion")
+
+unittest.main()
