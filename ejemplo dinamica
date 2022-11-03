@@ -1,0 +1,27 @@
+def f(n):
+    if n==0 or n==1:
+        return n
+    else:
+        return f(n-1)+f(n-2)
+
+mem_temp = {}
+    
+def f_top(n):
+    if n==0 or n==1:
+        return n
+    elif n in mem_temp:
+        return mem_temp[n]
+    else:
+        mem_temp[n] = f_top(n-1)+f_top(n-2)
+        return mem_temp[n]
+    
+mem_temp_b = {}
+
+def f_bottom(n):
+    mem_temp_b[0],mem_temp_b[1]=0,1
+    for i in range(2,n+1):
+        mem_temp_b[i] = mem_temp_b[i-1]+mem_temp_b[i-2]
+    return mem_temp_b
+print(f_top(50))
+print(f_bottom(50))
+
